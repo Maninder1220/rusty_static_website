@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!--
+    Page metadata
+    - charset: supports all modern characters
+    - viewport: makes layout responsive on mobile
+    - theme-color: browser UI color on supported devices
+  -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b0b0b" />
+
+  <!-- Browser tab title and SEO description -->
+  <title>frndsnfamily.com — Digital Marketing Consultant</title>
+  <meta name="description" content="frndsnfamily.com — Digital Marketing Consultant. Need advice? Drop your email and WhatsApp details; we’ll send meeting details." />
+
+  <!-- External CSS file -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+  <!--
+    Decorative visual layers
+    - aria-hidden because these are purely visual
+    - JS updates wind/shimmer/cursorGlow for motion effects
+  -->
+  <div class="wind" id="wind" aria-hidden="true"></div>
+  <div class="shimmer" id="shimmer" aria-hidden="true"></div>
+  <div class="cursorGlow" id="cursorGlow" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <!-- Sticky top navigation -->
+    <header>
+      <div class="nav">
+        <!-- Brand link: clicking returns user to top of page -->
+        <a class="brand" href="#top" aria-label="Go to top">
+          <span class="dot" aria-hidden="true"></span>
+          <span>frndsnfamily.com</span>
+        </a>
+
+        <!-- Primary page navigation -->
+        <nav class="navlinks" aria-label="Primary">
+          <a href="#services">Services</a>
+          <a href="#process">Process</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <!-- Header actions: theme selector, sound toggle, contact CTA -->
+        <div class="actions">
+          <div class="palette" aria-label="Theme color selector">
+            <button class="swatch" type="button" data-hue="0" aria-label="Monochrome"></button>
+            <button class="swatch" type="button" data-hue="210" aria-label="Cool"></button>
+            <button class="swatch" type="button" data-hue="140" aria-label="Fresh"></button>
+            <button class="swatch" type="button" data-hue="300" aria-label="Violet"></button>
+          </div>
+
+          <button class="btn" id="soundBtn" type="button" aria-pressed="false" title="Toggle sound">
+            <span aria-hidden="true">♪</span>
+            <span id="soundLabel">Sound: Off</span>
+          </button>
+
+          <a class="btn primary" href="#contact">Need advice?</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="top">
+      <!-- Hero section: main message + supporting cards -->
+      <div class="hero">
+        <section class="card reveal" id="hero">
+          <p class="kicker">Digital Marketing Consultant</p>
+          <h1>Simple, measurable growth for brands that want clarity.</h1>
+          <p class="lead">
+            We help you identify what’s working, what’s wasting budget, and what to do next.
+            Share your email and WhatsApp details—we’ll send you meeting options.
+          </p>
+
+          <!-- Quick capability tags -->
+          <div class="pills" aria-label="Highlights">
+            <span class="pill">Strategy</span>
+            <span class="pill">Performance</span>
+            <span class="pill">Content</span>
+            <span class="pill">SEO</span>
+            <span class="pill">Ads</span>
+            <span class="pill">Analytics</span>
+          </div>
+
+          <div class="hero-actions">
+            <a class="btn primary" href="#contact" id="primaryCta">Drop your details</a>
+            <a class="btn" href="#services">See what we do</a>
+          </div>
+        </section>
+
+        <aside class="split">
+          <div class="mini reveal">
+            <h3>Minimal. Focused. Fast.</h3>
+            <p>Black-and-white UI, subtle motion, smooth scrolling, and a clear CTA. No clutter.</p>
+          </div>
+
+          <div class="mini reveal">
+            <h3>What you get</h3>
+            <p>We send meeting details and a short checklist to prepare, so the call stays practical.</p>
+          </div>
+
+          <div class="mini reveal">
+            <h3>One click, one note</h3>
+            <p>Tap sound on. Every click plays a gentle sitar-like pluck. Scroll adds a wind shimmer.</p>
+          </div>
+        </aside>
+      </div>
+
+      <!-- Services section -->
+      <section id="services" class="reveal">
+        <p class="kicker">Services</p>
+        <div class="grid3">
+          <div class="service">
+            <div class="top">
+              <h4>Growth Audit</h4>
+              <span class="tag">90 min</span>
+            </div>
+            <p>Identify leaks across website, funnel, ads, and analytics. Prioritized next steps.</p>
+          </div>
+
+          <div class="service">
+            <div class="top">
+              <h4>SEO + Content</h4>
+              <span class="tag">Compounding</span>
+            </div>
+            <p>Keyword strategy, content plan, on-page fixes, and technical SEO direction.</p>
+          </div>
+
+          <div class="service">
+            <div class="top">
+              <h4>Paid Performance</h4>
+              <span class="tag">ROI</span>
+            </div>
+            <p>Campaign structure, creatives, landing pages, and measurement improvements.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Process section -->
+      <section id="process" class="reveal">
+        <p class="kicker">How it works</p>
+        <div class="grid3">
+          <div class="service">
+            <div class="top">
+              <h4>1) Share details</h4>
+              <span class="tag">Email + WhatsApp</span>
+            </div>
+            <p>Drop your email and WhatsApp. We reply with meeting slots and a prep checklist.</p>
+          </div>
+
+          <div class="service">
+            <div class="top">
+              <h4>2) Quick review</h4>
+              <span class="tag">15–30 min</span>
+            </div>
+            <p>We review what you share and highlight the highest-impact opportunities.</p>
+          </div>
+
+          <div class="service">
+            <div class="top">
+              <h4>3) Meeting</h4>
+              <span class="tag">Action plan</span>
+            </div>
+            <p>Clear action items and next steps. If we continue, we set a simple execution plan.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact / lead-capture section -->
+      <section id="contact" class="reveal">
+        <div class="card">
+          <p class="kicker">Need advice?</p>
+          <h2 class="contact-title">Drop your details. We’ll send meeting options.</h2>
+          <p class="lead contact-lead">No spam. Just meeting details and a short checklist to prepare.</p>
+
+          <div class="cta">
+            <!--
+              Lead form
+              - novalidate lets our JavaScript show custom messages
+              - autocomplete improves user experience on repeated visits
+            -->
+            <form id="leadForm" autocomplete="on" novalidate>
+              <div>
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text" placeholder="Your name" />
+              </div>
+
+              <div>
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" inputmode="email" placeholder="you@company.com" required />
+                <div class="hint">We’ll use this to send meeting details.</div>
+              </div>
+
+              <div>
+                <label for="whatsapp">WhatsApp</label>
+                <input id="whatsapp" name="whatsapp" type="tel" inputmode="tel" placeholder="+91 XXXXX XXXXX" required />
+                <div class="hint">Include country code (e.g., +91).</div>
+              </div>
+
+              <div>
+                <label for="message">What do you need help with?</label>
+                <textarea id="message" name="message" placeholder="e.g., improve leads, reduce CAC, fix tracking, SEO plan..."></textarea>
+              </div>
+
+              <button class="btn primary" type="submit" id="submitBtn">
+                <span aria-hidden="true">→</span>
+                <span>Send details</span>
+              </button>
+
+              <div class="ok" id="okBox" role="status" aria-live="polite"></div>
+              <p class="hint">Tip: Clicking anywhere also plays a gentle sitar-like pluck when sound is on.</p>
+            </form>
+
+            <div class="mini contact-side-card">
+              <h3 class="contact-side-title">Minimal, professional response</h3>
+              <p class="contact-side-text">After you submit, you’ll get a copy-ready message to send via email or WhatsApp.</p>
+              <p class="contact-side-text">You can later connect this form to your backend API, Google Sheets, or CRM without changing the UI.</p>
+
+              <div class="contact-side-actions">
+                <button class="btn" type="button" id="copyBtn">Copy message</button>
+                <a class="btn" href="#top" aria-label="Back to top">Back to top</a>
+              </div>
+
+              <p class="hint contact-side-note">Note: This page uses separate HTML, CSS, and JS files. No external libraries.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer>
+        <div class="footer-row">
+          <div>© <span id="year"></span> frndsnfamily.com</div>
+
+          <div class="footer-links">
+            <a href="#services">Services</a>
+            <a href="#contact">Contact</a>
+          </div>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <!-- External JavaScript file -->
+  <script src="js/main.js"></script>
+</body>
+</html>

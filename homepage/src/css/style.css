@@ -1,0 +1,628 @@
+/*
+  ==========================================================
+  CSS ORGANIZATION MAP
+  ==========================================================
+  01. Design tokens / theme variables
+  02. Accessibility and base reset
+  03. Background visual layers
+  04. Header and navigation
+  05. Buttons and common UI components
+  06. Main layout, hero, cards, and responsive grids
+  07. Services, process, and contact form
+  08. Footer
+  09. Animation helpers and utility classes
+  10. Helper classes moved from old inline styles
+
+  Note:
+  This file controls visual presentation only.
+  HTML gives structure. JavaScript gives behavior.
+  ==========================================================
+*/
+
+/* 01. Design tokens: change these values to control the full visual theme */
+:root{
+  --bg: #0b0b0b;
+  --fg: #f5f5f5;
+  --muted: rgba(245,245,245,.7);
+  --hair: rgba(245,245,245,.12);
+  --card: rgba(255,255,255,.04);
+  --card2: rgba(255,255,255,.06);
+  --shadow: rgba(0,0,0,.35);
+  --accent: #ffffff;
+  --accent2: #cfcfcf;
+  --radius: 18px;
+  --ease: cubic-bezier(.2,.8,.2,1);
+  --max: 1080px;
+
+  /* JS changes this value when the user clicks color swatches */
+  --hue: 0deg;
+}
+
+/* 02. Accessibility: respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Base reset: predictable sizing and page behavior */
+*{
+  box-sizing: border-box;
+}
+
+html{
+  scroll-behavior: smooth;
+}
+
+body{
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  background:
+    radial-gradient(1200px 700px at 70% 20%, rgba(255,255,255,.06), transparent 55%),
+    radial-gradient(900px 600px at 15% 85%, rgba(255,255,255,.05), transparent 55%),
+    var(--bg);
+  color: var(--fg);
+  min-height: 100vh;
+  overflow-x: hidden;
+  filter: hue-rotate(var(--hue));
+}
+
+/* Links inherit page color so navigation stays visually consistent */
+a{
+  color: inherit;
+  text-decoration: none;
+}
+
+/* 03. Background visual layer: diagonal wind/shimmer texture */
+.wind{
+  position: fixed;
+  inset: -20vmax;
+  pointer-events: none;
+  z-index: 0;
+  opacity: .45;
+  background:
+    repeating-linear-gradient(
+      120deg,
+      rgba(255,255,255,.035) 0,
+      rgba(255,255,255,.035) 1px,
+      transparent 1px,
+      transparent 22px
+    );
+  transform: translate3d(0,0,0);
+  mix-blend-mode: screen;
+  mask-image: radial-gradient(closest-side at 50% 50%, rgba(0,0,0,.9), transparent 70%);
+  filter: blur(1.5px);
+}
+
+/* Background visual layer: top glow and horizontal shimmer controlled by scroll JS */
+.shimmer{
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(900px 250px at 50% 0%, rgba(255,255,255,.08), transparent 60%),
+    linear-gradient(90deg, transparent 0%, rgba(255,255,255,.06) 25%, transparent 50%, rgba(255,255,255,.04) 75%, transparent 100%);
+  opacity: .25;
+  transform: translate3d(0,0,0);
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,.7), rgba(0,0,0,.15));
+}
+
+/* 04. Main wrapper sits above fixed background effect layers */
+.wrap{
+  position: relative;
+  z-index: 1;
+}
+
+header{
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: rgba(11,11,11,.55);
+  border-bottom: 1px solid var(--hair);
+}
+
+/* Header navigation container */
+.nav{
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+/* Brand/logo block on the left side of the navbar */
+.brand{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  letter-spacing: .6px;
+  text-transform: lowercase;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.dot{
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--fg);
+  box-shadow: 0 0 0 6px rgba(255,255,255,.06);
+}
+
+/* Desktop navigation links */
+.navlinks{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.navlinks a{
+  font-size: 13px;
+  color: var(--muted);
+  padding: 8px 10px;
+  border-radius: 12px;
+  transition: background .25s var(--ease), color .25s var(--ease);
+}
+
+.navlinks a:hover{
+  background: rgba(255,255,255,.06);
+  color: var(--fg);
+}
+
+/* Right-side navbar actions: palette, sound toggle, CTA */
+.actions{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* 05. Reusable pill-style button used for links and real buttons */
+.btn{
+  border: 1px solid var(--hair);
+  background: rgba(255,255,255,.04);
+  color: var(--fg);
+  padding: 10px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform .18s var(--ease), background .25s var(--ease), border-color .25s var(--ease);
+  user-select: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 10px 30px var(--shadow);
+}
+
+.btn:hover{
+  background: rgba(255,255,255,.06);
+  border-color: rgba(255,255,255,.18);
+}
+
+.btn:active{
+  transform: translateY(1px) scale(.99);
+}
+
+.btn.primary{
+  background: rgba(255,255,255,.09);
+  border-color: rgba(255,255,255,.22);
+}
+
+/* 06. Main content width and page spacing */
+main{
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 32px 18px 70px;
+}
+
+/* Hero uses two columns on desktop and stacks on mobile */
+.hero{
+  display: grid;
+  grid-template-columns: 1.3fr .9fr;
+  gap: 22px;
+  align-items: stretch;
+  padding-top: 12px;
+}
+
+@media (max-width: 900px){
+  .hero{
+    grid-template-columns: 1fr;
+  }
+
+  .navlinks{
+    display: none;
+  }
+}
+
+/* Large glass-style card used for hero and contact blocks */
+.card{
+  border: 1px solid var(--hair);
+  background: linear-gradient(180deg, var(--card), transparent 90%);
+  border-radius: var(--radius);
+  padding: 22px;
+  box-shadow: 0 18px 60px rgba(0,0,0,.4);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Soft moving highlight inside cards; JS updates --mx and --my */
+.card::before{
+  content: "";
+  position: absolute;
+  inset: -40% -30%;
+  background: radial-gradient(closest-side, rgba(255,255,255,.10), transparent 60%);
+  transform: translate3d(var(--mx, 0), var(--my, 0), 0);
+  opacity: .35;
+  pointer-events: none;
+  transition: transform .3s var(--ease);
+}
+
+/* Small uppercase label above section headings */
+.kicker{
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  margin: 0 0 10px;
+}
+
+h1{
+  margin: 0 0 12px;
+  font-size: clamp(28px, 3.4vw, 46px);
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+}
+
+.lead{
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 62ch;
+}
+
+/* Service highlight chips in hero section */
+.pills{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.pill{
+  font-size: 12px;
+  color: rgba(255,255,255,.85);
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.05);
+  padding: 9px 12px;
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+}
+
+/* Right side of hero: stacked supporting cards */
+.split{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  height: 100%;
+}
+
+.mini{
+  border: 1px solid var(--hair);
+  background: linear-gradient(180deg, var(--card2), transparent 85%);
+  border-radius: var(--radius);
+  padding: 18px;
+  position: relative;
+  overflow: hidden;
+}
+
+.mini h3{
+  margin: 0 0 8px;
+  font-size: 16px;
+  letter-spacing: -0.01em;
+}
+
+.mini p{
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+  font-size: 13px;
+}
+
+/* Section spacing and anchor offset for sticky header */
+section{
+  margin-top: 26px;
+  scroll-margin-top: 86px;
+}
+
+/* Three-column grid for services/process cards */
+.grid3{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+@media (max-width: 900px){
+  .grid3{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Small content cards used in Services and Process sections */
+.service{
+  border: 1px solid var(--hair);
+  border-radius: var(--radius);
+  padding: 18px;
+  background: rgba(255,255,255,.03);
+  position: relative;
+  overflow: hidden;
+  transition: transform .25s var(--ease), background .25s var(--ease), border-color .25s var(--ease);
+}
+
+.service:hover{
+  transform: translateY(-2px);
+  background: rgba(255,255,255,.05);
+  border-color: rgba(255,255,255,.18);
+}
+
+.service .top{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.service h4{
+  margin: 0;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+}
+
+.tag{
+  font-size: 11px;
+  color: rgba(255,255,255,.78);
+  padding: 7px 10px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 999px;
+  background: rgba(255,255,255,.03);
+}
+
+.service p{
+  margin: 10px 0 0;
+  color: var(--muted);
+  line-height: 1.6;
+  font-size: 13px;
+}
+
+/* Contact section layout: form on left, explanation card on right */
+.cta{
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 14px;
+  align-items: start;
+}
+
+@media (max-width: 900px){
+  .cta{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Lead form layout */
+form{
+  display: grid;
+  gap: 12px;
+}
+
+/* Form labels */
+label{
+  font-size: 12px;
+  color: rgba(255,255,255,.8);
+  display: block;
+  margin-bottom: 6px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+/* Shared input and textarea styling */
+input,
+textarea{
+  width: 100%;
+  padding: 12px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.04);
+  color: var(--fg);
+  outline: none;
+  transition: border-color .25s var(--ease), background .25s var(--ease);
+  font-size: 14px;
+}
+
+input:focus,
+textarea:focus{
+  border-color: rgba(255,255,255,.28);
+  background: rgba(255,255,255,.06);
+}
+
+textarea{
+  min-height: 110px;
+  resize: vertical;
+}
+
+/* Small helper text below form fields */
+.hint{
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-top: 2px;
+}
+
+/* Form confirmation/error message box; shown only through JS */
+.ok{
+  display: none;
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(255,255,255,.05);
+  color: rgba(255,255,255,.9);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* 08. Footer */
+footer{
+  margin-top: 34px;
+  padding: 26px 0 8px;
+  color: rgba(255,255,255,.55);
+  font-size: 12px;
+  border-top: 1px solid var(--hair);
+}
+
+/* 09. Reveal animation state; JS adds .on when element enters viewport */
+.reveal{
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.reveal.on{
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity .6s var(--ease), transform .6s var(--ease);
+}
+
+/* Theme palette control */
+.palette{
+  display: inline-flex;
+  gap: 8px;
+  padding: 4px;
+  border-radius: 999px;
+  border: 1px solid var(--hair);
+  background: rgba(255,255,255,.03);
+}
+
+/* Round palette buttons */
+.swatch{
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.08);
+  cursor: pointer;
+  transition: transform .18s var(--ease), border-color .25s var(--ease), background .25s var(--ease);
+}
+
+.swatch:hover{
+  transform: translateY(-1px);
+  border-color: rgba(255,255,255,.25);
+}
+
+.swatch[data-hue="0"]{
+  background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.04));
+}
+
+.swatch[data-hue="210"]{
+  background: linear-gradient(180deg, rgba(120,180,255,.14), rgba(255,255,255,.04));
+}
+
+.swatch[data-hue="140"]{
+  background: linear-gradient(180deg, rgba(140,255,190,.12), rgba(255,255,255,.04));
+}
+
+.swatch[data-hue="300"]{
+  background: linear-gradient(180deg, rgba(230,150,255,.12), rgba(255,255,255,.04));
+}
+
+/* Cursor glow follows pointer movement */
+.cursorGlow{
+  position: fixed;
+  width: 900px;
+  height: 900px;
+  left: 0;
+  top: 0;
+  transform: translate3d(-50%,-50%,0);
+  pointer-events: none;
+  z-index: 0;
+  opacity: .18;
+  background: radial-gradient(circle at center, rgba(255,255,255,.12), transparent 62%);
+  filter: blur(2px);
+  mix-blend-mode: screen;
+}
+
+/* Utility: visually hidden text for assistive technologies */
+.sr-only{
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/*
+  10. Layout helper classes moved from old inline styles.
+  This is important because now style stays inside CSS,
+  and HTML remains easier to read.
+*/
+.hero-actions{
+  margin-top: 18px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.contact-title{
+  margin: 0 0 10px;
+  font-size: 26px;
+  letter-spacing: -0.02em;
+}
+
+.contact-lead{
+  margin-bottom: 16px;
+}
+
+.contact-side-card{
+  height: 100%;
+}
+
+.contact-side-title{
+  margin: 0 0 10px;
+}
+
+.contact-side-text{
+  margin: 0 0 12px;
+}
+
+.contact-side-actions{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.contact-side-note{
+  margin-top: 12px;
+}
+
+.footer-row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.footer-links{
+  display: flex;
+  gap: 10px;
+}
