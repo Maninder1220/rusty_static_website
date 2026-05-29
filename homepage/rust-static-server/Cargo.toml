@@ -1,0 +1,25 @@
+[package]
+name = "rust-static-server"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+axum = "0.8"
+tokio = { version = "1", features = ["full"] }
+
+# Embeds your website folder into the Rust binary at compile time.
+rust-embed = "8"
+
+# Detects MIME/content type.
+# Example:
+# index.html     -> text/html
+# css/style.css  -> text/css
+# js/main.js     -> text/javascript or application/javascript
+mime_guess = "2"
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = "0.3"
+
+# Request/response tracing middleware
+tower-http = { version = "0.6", features = ["trace"] }

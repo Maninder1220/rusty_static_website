@@ -36,5 +36,4 @@ Thumbs.db
 *.so
 *.dylib
 
-# If you manually copy compiled binary to project root
-rust-static-server
+# If you manually copy compiled binary to project root add your binary name 
